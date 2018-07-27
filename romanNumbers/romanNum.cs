@@ -10,13 +10,13 @@ namespace romanNumbers
         private static string numb;
         public static string Numb
         {
-            get { return numb; }
+            get { return Numb; }
             private set { Numb = numb; }
         }
         public static int ConvertToDec(string value)
         {
             if ((value == null) || (value.Length == 0))
-                throw new ExeptionRomanNumber( ExeptionRes.nullOrEmpty);
+                throw new ExeptionRomanNumber(ExeptionRes.nullOrEmpty);
             int res = 0;
             int t = 0;
             int max = 0;
@@ -37,14 +37,31 @@ namespace romanNumbers
                     max = t;
             }
             if (value.ToUpper() != ConvertToRoman(res))
-                throw new ExeptionRomanNumber( string.Format(ExeptionRes.IncorrectNumber, ConvertToRoman(res), res, value));
+                throw new ExeptionRomanNumber(string.Format(ExeptionRes.IncorrectNumber, ConvertToRoman(res), res, value));
             return res;
         }
         public static string ConvertToRoman(int decNum)
         {
             string romNum = "";
             if ((decNum < 1) || (decNum > 3999))
-                throw new ExeptionRomanNumber( ExeptionRes.wrongRange);
+                throw new ExeptionRomanNumber(ExeptionRes.wrongRange);
+            var romanMap = new List<KeyValuePair<int, string>>()
+            {
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(4, "IV"),
+                new KeyValuePair<int, string>(5, "V"),
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(1, "I"),
+                new KeyValuePair<int, string>(1, "I"),
+
+
+            };
+
             while (decNum >= 1000)
             {
                 romNum += "M";
@@ -117,11 +134,11 @@ namespace romanNumbers
         {
             if ((prev.Length >= 3) && ((prev[0] == prev[1]) && (prev[1] == prev[2]) && (prev[2] == t)))
             {
-                throw new ExeptionRomanNumber( ExeptionRes.treeInARow);
+                throw new ExeptionRomanNumber(ExeptionRes.treeInARow);
             }
             if ((t < max) && ((prev[0] != max) || (t == 5) || (t == 50) || (t == 500)))
             {
-                throw new ExeptionRomanNumber( ExeptionRes.wrong);
+                throw new ExeptionRomanNumber(ExeptionRes.wrong);
             }
             for (int i2 = prev.Length - 1; i2 > 0; i2--)
             {
@@ -163,7 +180,7 @@ namespace romanNumbers
                     return 1000;
                     break;
                 default:
-                    throw new ExeptionRomanNumber( String.Format(ExeptionRes.unsupportedChar, ch));
+                    throw new ExeptionRomanNumber(String.Format(ExeptionRes.unsupportedChar, ch));
             }
         }
     }
