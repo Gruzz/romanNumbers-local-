@@ -548,14 +548,14 @@ namespace UnitTestRomanNumbers
                 Assert.AreEqual(ExeptionRes.wrongRange, ex.Message);
             }
         }
-        [TestMethod]
+       [TestMethod]
         public void numb_notEqual()
         {
-            var t1 = RomanNum.ConvertToRoman(1);
-            string t2 = RomanNum.Numb;            
-            var t3 = RomanNum.ConvertToRoman(10);
-            string t4 = RomanNum.Numb;
-            Assert.AreNotEqual(t2, t4);
+            RomanNum a1 = new RomanNum(1);
+            string s1 = a1.Roman;
+            a1.Dec = 2;
+            string s2 = a1.Roman;
+            Assert.AreNotEqual(s1, s2);
         }
     }
 }

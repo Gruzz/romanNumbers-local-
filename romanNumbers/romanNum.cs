@@ -7,11 +7,21 @@ namespace romanNumbers
 {
     public class RomanNum
     {
-        private static string numb;
-        public static string Numb
+        public RomanNum(int a) { roman = ConvertToRoman(a); dec = a; }
+        private int dec;
+        public int Dec
         {
-            get { return Numb; }
-            private set { Numb = numb; }
+            get { return dec; }
+            set {               
+                dec = value;
+                roman = ConvertToRoman(dec);
+            }
+        }
+        private string roman;
+        public string Roman
+        {
+            get { return roman; }
+            private set { roman = value; }
         }
         public static int ConvertToDec(string value)
         {
@@ -50,84 +60,26 @@ namespace romanNumbers
                 new KeyValuePair<int, string>(1, "I"),
                 new KeyValuePair<int, string>(4, "IV"),
                 new KeyValuePair<int, string>(5, "V"),
-                new KeyValuePair<int, string>(1, "I"),
-                new KeyValuePair<int, string>(1, "I"),
-                new KeyValuePair<int, string>(1, "I"),
-                new KeyValuePair<int, string>(1, "I"),
-                new KeyValuePair<int, string>(1, "I"),
-                new KeyValuePair<int, string>(1, "I"),
-                new KeyValuePair<int, string>(1, "I"),
-                new KeyValuePair<int, string>(1, "I"),
-
-
+                new KeyValuePair<int, string>(9, "IX"),
+                new KeyValuePair<int, string>(10, "X"),
+                new KeyValuePair<int, string>(40, "XL"),
+                new KeyValuePair<int, string>(50, "L"),
+                new KeyValuePair<int, string>(90, "XC"),
+                new KeyValuePair<int, string>(100, "C"),
+                new KeyValuePair<int, string>(400, "CD"),
+                new KeyValuePair<int, string>(500, "D"),
+                new KeyValuePair<int, string>(900, "CM"),
+                new KeyValuePair<int, string>(1000, "M"),
             };
+            for (int i = romanMap.Count - 1; i >= 0; i--)
+            {
+                while (decNum >= romanMap[i].Key)
+                {
+                    romNum += romanMap[i].Value;
+                    decNum -= romanMap[i].Key;
+                }
+            }
 
-            while (decNum >= 1000)
-            {
-                romNum += "M";
-                decNum -= 1000;
-            }
-            while (decNum >= 900)
-            {
-                romNum += "CM";
-                decNum -= 900;
-            }
-            while (decNum >= 500)
-            {
-                romNum += "D";
-                decNum -= 500;
-            }
-            while (decNum >= 400)
-            {
-                romNum += "CD";
-                decNum -= 400;
-            }
-            while (decNum >= 100)
-            {
-                romNum += "C";
-                decNum -= 100;
-            }
-            while (decNum >= 90)
-            {
-                romNum += "XC";
-                decNum -= 90;
-            }
-            while (decNum >= 50)
-            {
-                romNum += "L";
-                decNum -= 50;
-            }
-            while (decNum >= 40)
-            {
-                romNum += "XL";
-                decNum -= 40;
-            }
-            while (decNum >= 10)
-            {
-                romNum += "X";
-                decNum -= 10;
-            }
-            while (decNum >= 9)
-            {
-                romNum += "IX";
-                decNum -= 9;
-            }
-            while (decNum >= 5)
-            {
-                romNum += "V";
-                decNum -= 5;
-            }
-            while (decNum >= 4)
-            {
-                romNum += "IV";
-                decNum -= 4;
-            }
-            while (decNum >= 1)
-            {
-                romNum += "I";
-                decNum -= 1;
-            }
-            numb = romNum;
             return romNum;
         }
         private static int[] getPrev(int[] prev, int t, int max)
