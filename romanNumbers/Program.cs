@@ -9,10 +9,7 @@ namespace romanNumbers
     {
         static void Main(string[] args)
         {
-            var a = new RomanNum(1);
-            string s = a.Roman;
-            string z = a.Roman;
-            string xs = a.Roman;
+           
         }
     }
 }

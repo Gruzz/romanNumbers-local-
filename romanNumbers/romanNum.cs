@@ -8,6 +8,7 @@ namespace romanNumbers
     public class RomanNum
     {
         public RomanNum(int a) { roman = ConvertToRoman(a); dec = a; }
+        //field for integer representation of number
         private int dec;
         public int Dec
         {
@@ -17,39 +18,56 @@ namespace romanNumbers
                 roman = ConvertToRoman(dec);
             }
         }
+        //field for roman representation of number
         private string roman;
         public string Roman
         {
             get { return roman; }
             private set { roman = value; }
         }
+        /// <summary>
+        /// convert roman number to integer
+        /// </summary>
+        /// <param name="value"> roman number </param>
+        /// <returns></returns>
         public static int ConvertToDec(string value)
         {
             if ((value == null) || (value.Length == 0))
                 throw new ExeptionRomanNumber(ExeptionRes.nullOrEmpty);
             int res = 0;
-            int t = 0;
+            int currentChar = 0;
+            // current max roman number 
             int max = 0;
-            int[] tprev = new int[3];
-            for (int i2 = tprev.Length - 1; i2 >= 0; i2--)
+            // array to store the last 3 characters
+            int[] prev = new int[3];
+            // fill array with 0
+            for (int i2 = prev.Length - 1; i2 >= 0; i2--)
             {
-                tprev[i2] = 0;
+                prev[i2] = 0;
             }
+            // 
             for (int i = value.Length - 1; i >= 0; i--)
             {
-                t = getRoman(value[i]);
-                if (t >= tprev[0])
-                    res += t;
+                currentChar = getRoman(value[i]);
+                if (currentChar >= prev[0])
+                    res += currentChar;
                 else
-                    res -= t;
-                tprev = getPrev(tprev, t, max);
-                if (t > max)
-                    max = t;
+                    res -= currentChar;
+                //update array and max roman number
+                prev = getPrev(prev, currentChar, max);
+                if (currentChar > max)
+                    max = currentChar;
             }
+            // check for correct roman number
             if (value.ToUpper() != ConvertToRoman(res))
                 throw new ExeptionRomanNumber(string.Format(ExeptionRes.IncorrectNumber, ConvertToRoman(res), res, value));
             return res;
         }
+        /// <summary>
+        /// convert integer to roman number
+        /// </summary>
+        /// <param name="decNum"> integer number</param>
+        /// <returns></returns>
         public static string ConvertToRoman(int decNum)
         {
             string romNum = "";
@@ -79,26 +97,40 @@ namespace romanNumbers
                     decNum -= romanMap[i].Key;
                 }
             }
-
             return romNum;
         }
-        private static int[] getPrev(int[] prev, int t, int max)
+        /// <summary>
+        /// update array to store the last 3 characters methood
+        /// </summary>
+        /// <param name="prev">current array</param>
+        /// <param name="currentChar"> current char</param>
+        /// <param name="max">curent max roman number</param>
+        /// <returns></returns>
+        private static int[] getPrev(int[] prev, int currentChar, int max)
         {
-            if ((prev.Length >= 3) && ((prev[0] == prev[1]) && (prev[1] == prev[2]) && (prev[2] == t)))
+            //check for more than 3 in row identical characters 
+            if ((prev.Length >= 3) && ((prev[0] == prev[1]) && (prev[1] == prev[2]) && (prev[2] == currentChar)))
             {
                 throw new ExeptionRomanNumber(ExeptionRes.treeInARow);
             }
-            if ((t < max) && ((prev[0] != max) || (t == 5) || (t == 50) || (t == 500)))
+            // check for correct rules of subtraction
+            if ((currentChar < max) && ((prev[0] != max) || (currentChar == 5) || (currentChar == 50) || (currentChar == 500)))
             {
                 throw new ExeptionRomanNumber(ExeptionRes.wrong);
             }
+            //update array
             for (int i2 = prev.Length - 1; i2 > 0; i2--)
             {
                 prev[i2] = prev[i2 - 1];
             }
-            prev[0] = t;
+            prev[0] = currentChar;
             return prev;
         }
+        /// <summary>
+        /// get integer from roman character
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <returns></returns>
         private static int getRoman(char ch)
         {
             switch (ch)
