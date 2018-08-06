@@ -10,8 +10,8 @@
 
 namespace romanNumbers {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace romanNumbers {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ExeptionRes {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ExeptionRes() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace romanNumbers {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,12 +59,13 @@ namespace romanNumbers {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Incorrect Roman number {2}. Maybe you mean {0}. If it is true your number: {1}.
         /// </summary>
+
         public static string IncorrectNumber {
-            get {
+            get {                
                 return ResourceManager.GetString("IncorrectNumber", resourceCulture);
             }
         }
@@ -77,10 +78,11 @@ namespace romanNumbers {
                 return ResourceManager.GetString("nullOrEmpty", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to No more than three identical symbols can go in a row.
         /// </summary>
+        readonly string a;
         public static string treeInARow {
             get {
                 return ResourceManager.GetString("treeInARow", resourceCulture);
